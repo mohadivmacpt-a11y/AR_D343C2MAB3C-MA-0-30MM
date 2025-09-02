@@ -5,19 +5,21 @@
   <title>AR Model Viewer</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body { margin: 0; overflow: hidden; }
+    body { margin: 0; }
     model-viewer { width: 100vw; height: 100vh; }
   </style>
 </head>
 <body>
-
   <model-viewer
       src="D343C2MAB3C-MA-0-30MM.glb"
       ar
       ar-modes="webxr scene-viewer quick-look"
       camera-controls
-      auto-rotate>
+      auto-rotate
+      exposure="1"
+      environment-image="neutral"
+      shadow-intensity="1">
   </model-viewer>
-
 </body>
 </html>
+
