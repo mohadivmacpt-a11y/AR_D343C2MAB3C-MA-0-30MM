@@ -2,15 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>AR Model Viewer</title>
+  <title>AR Camera Test</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body { margin: 0; }
-    model-viewer { width: 100vw; height: 100vh; }
+    body { margin: 0; display: flex; flex-direction: column; height: 100vh; }
+    model-viewer { flex: 1; width: 100%; }
+    button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
+
 <model-viewer
+    id="viewer"
     src="D343C2MAB3C-MA-0-30MM.glb"
     ar
     ar-modes="webxr scene-viewer quick-look"
@@ -18,10 +34,26 @@
     auto-rotate
     exposure="1"
     environment-image="neutral"
-    shadow-intensity="1"
-    ar-scale="auto">
+    shadow-intensity="1">
 </model-viewer>
+
+<button id="arButton">Test AR Camera</button>
+
+<script>
+  const viewer = document.getElementById('viewer');
+  const btn = document.getElementById('arButton');
+
+  btn.addEventListener('click', async () => {
+    try {
+      // request AR session
+      const arSession = await viewer.activateAR();
+      console.log('AR session started:', arSession);
+    } catch (err) {
+      console.error('Failed to start AR session:', err);
+      alert('AR not supported or failed to start.');
+    }
+  });
+</script>
+
 </body>
 </html>
-
-
